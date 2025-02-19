@@ -1,16 +1,15 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
-import { FaCalendarAlt } from "react-icons/fa";
 
-const EmployeeKpiChart = () => {
-  const [selectedYear, setSelectedYear] = useState("2024");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+export default function MostPopularJobs() {
+  //   const [selectedYear, setSelectedYear] = useState("2024");
+  //   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // بيانات المخطط
   const series = [
     {
       name: "Performance",
-      data: [160, 100, 75, 80, 120, 90, 140, 50, 30],
+      data: [160, 100, 75, 80, 120, 140, 50],
     },
   ];
 
@@ -34,15 +33,13 @@ const EmployeeKpiChart = () => {
     },
     xaxis: {
       categories: [
-        "Ali El-Shoraa",
-        "Mostafa",
-        "Hossam",
-        "Hussine",
-        "Attia",
-        "Yahia",
-        "Ali",
-        "Eman",
-        "Nada",
+        "Laravel Back-end",
+        "React.js Front-end",
+        "Angular Front-end",
+        "Vue Front-end",
+        "React Native Mobile-app",
+        "Next.js Front-end",
+        "Ui/Ux Design",
       ],
     },
     tooltip: {
@@ -67,18 +64,10 @@ const EmployeeKpiChart = () => {
       <div className="bg-white rounded-lg shadow p-4 flex flex-col w-full">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
-          <h5 className="text-xl font-semibold">Employees KPI score</h5>
+          <h5 className="text-xl font-semibold">Most jobs</h5>
         </div>
         {/* Performance Info */}
-        <div className="mb-4">
-          <div className="bg-gray-100 flex items-center rounded p-2">
-            <h3 className="mr-2 text-2xl font-bold">98%</h3>
-            <span className="bg-green-100 text-green-700 rounded-full px-2 py-1 text-xs mr-1">
-              12%
-            </span>
-            <span className="text-sm">vs last years</span>
-          </div>
-        </div>
+
         {/* Chart */}
         <div>
           <Chart options={options} series={series} type="area" height={288} />
@@ -86,6 +75,4 @@ const EmployeeKpiChart = () => {
       </div>
     </div>
   );
-};
-
-export default EmployeeKpiChart;
+}

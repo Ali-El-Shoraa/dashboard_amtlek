@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=fallback");
 
 @import "tailwindcss";
-@import "./additional-styles/utility-patterns.css" layer(components);
+/* @import "./additional-styles/utility-patterns.css" layer(components); */
 
 @plugin "@tailwindcss/forms" {
   strategy: base;
 }
+
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 @custom-variant sidebar-expanded (&:is(.sidebar-expanded *));
@@ -115,7 +117,7 @@
   --text-6xl: 3.75rem;
   --text-6xl--line-height: 1.2;
   --text-6xl--letter-spacing: -0.02em;
-
+  /*  */
   /* custome size */
   --breakpoint-xs: 480px;
   --width-120: 7.5rem;
@@ -123,10 +125,12 @@
 
   /* custome color */
   --color-custom-blue: #1f6893;
+  --color-custom-blue-secundry: #01425a;
   --color-secundary: #406b88;
   --color-custome-red: #f78282;
   --color-purple-clouds: #6965eb;
   --color-custome-green: #22aa52;
+  --color-custome-gray: #878a99;
   --shadow-box-shadow: 0 0 4px rgba(15, 34, 58, 0.12);
 }
 

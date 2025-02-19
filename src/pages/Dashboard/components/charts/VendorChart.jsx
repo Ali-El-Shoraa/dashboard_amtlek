@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Chart from "react-apexcharts";
 
 const VendorChart = () => {
@@ -58,29 +58,21 @@ const VendorChart = () => {
   ];
 
   return (
-    <div className="w-full xl:w-6/12">
-      <div className="bg-white shadow rounded h-[400px]">
-        <div className="p-4 h-full">
-          <h5 className="text-lg font-bold mb-4">
-            Vendor ( Properties and Projects )
-          </h5>
-          <div className="flex justify-center">
-            <div
-              className="w-full"
-              style={{ minHeight: "365px", height: "350px" }}
-            >
-              <Chart
-                options={options}
-                series={series}
-                type="bar"
-                height={350}
-              />
-            </div>
+    <div className="w-full bg-white shadow rounded p-4 h-full">
+      {/* <div className=" "> */}
+      <div className="h-full">
+        <h5 className="text-lg font-bold mb-4">
+          Vendor ( Properties and Projects )
+        </h5>
+        <div className="flex justify-center">
+          <div className="w-full">
+            <Chart options={options} series={series} type="bar" />
           </div>
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 };
 
-export default VendorChart;
+export default memo(VendorChart);

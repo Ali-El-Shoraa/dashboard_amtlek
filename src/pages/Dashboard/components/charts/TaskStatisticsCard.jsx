@@ -1,13 +1,12 @@
-import { memo } from "react";
 import Chart from "react-apexcharts";
 
-export default memo(function UsersFromChart() {
+function TaskStatisticsCard() {
   const options = {
     chart: {
       type: "donut",
     },
-    labels: ["Web", "IOS", "Android"],
-    colors: ["#10B981", "#3B82F6", "#F59E0B"],
+    labels: ["High", "Medium", "Low"],
+    colors: ["#ff5656", "#f0bb33", "#3ec972"],
     legend: {
       position: "bottom",
       horizontalAlign: "center",
@@ -20,17 +19,16 @@ export default memo(function UsersFromChart() {
     series: [90, 30, 20],
     plotOptions: {
       pie: {
-        startAngle: -180,
-        endAngle: 180,
+        startAngle: -90,
+        endAngle: 90,
         offsetY: 10,
         donut: {
           labels: {
             show: true,
             total: {
               show: true,
-              label: "Total Users",
+              label: "Total Tasks",
               formatter: function (w) {
-                // يحسب مجموع القيم الموجودة في series
                 return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
               },
             },
@@ -40,13 +38,17 @@ export default memo(function UsersFromChart() {
     },
     stroke: {
       lineCap: "round",
+      width: 4, // سمك الحواف
+      colors: ["#ffffff"], // لون الحواف
     },
   };
 
   return (
     // max-w-md
-    <div className="mx-auto h-full p-4 bg-white shadow rounded">
-      <h5 className="text-lg font-bold mb-4 text-center">Users Form</h5>
+    <div className="h-full p-4 bg-white shadow rounded">
+      <h5 className="text-lg font-bold mb-4 text-center">
+        Task Priority Statistics
+      </h5>
       <Chart
         options={options}
         series={options.series}
@@ -55,4 +57,6 @@ export default memo(function UsersFromChart() {
       />
     </div>
   );
-});
+}
+
+export default TaskStatisticsCard;

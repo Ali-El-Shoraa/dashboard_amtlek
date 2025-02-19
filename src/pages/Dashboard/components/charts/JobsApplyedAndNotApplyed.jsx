@@ -1,13 +1,13 @@
 import { memo } from "react";
 import Chart from "react-apexcharts";
 
-export default memo(function UsersFromChart() {
+export default memo(function JobsApplyedAndNotApplyed() {
   const options = {
     chart: {
       type: "donut",
     },
-    labels: ["Web", "IOS", "Android"],
-    colors: ["#10B981", "#3B82F6", "#F59E0B"],
+    labels: ["Jobs have CVs", "Jobs not have CVs"],
+    colors: ["#10B981", "#ff5656"],
     legend: {
       position: "bottom",
       horizontalAlign: "center",
@@ -17,7 +17,7 @@ export default memo(function UsersFromChart() {
         fontFamily: "Helvetica, Arial, sans-serif",
       },
     },
-    series: [90, 30, 20],
+    series: [90, 30],
     plotOptions: {
       pie: {
         startAngle: -180,
@@ -28,7 +28,7 @@ export default memo(function UsersFromChart() {
             show: true,
             total: {
               show: true,
-              label: "Total Users",
+              label: "Total Job's",
               formatter: function (w) {
                 // يحسب مجموع القيم الموجودة في series
                 return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
@@ -46,7 +46,9 @@ export default memo(function UsersFromChart() {
   return (
     // max-w-md
     <div className="mx-auto h-full p-4 bg-white shadow rounded">
-      <h5 className="text-lg font-bold mb-4 text-center">Users Form</h5>
+      <h5 className="text-lg font-bold mb-4 text-center">
+        Jobs applied CVs statistics
+      </h5>
       <Chart
         options={options}
         series={options.series}

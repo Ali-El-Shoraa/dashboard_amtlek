@@ -1,13 +1,6 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import LineChart from "../../charts/LineChart01";
-import { chartAreaGradient } from "../../charts/ChartjsConfig";
-// import EditMenu from "../../components/DropdownEditMenu";
+import { memo } from "react";
 
-// Import utilities
-import { adjustColorOpacity, getCssVariable } from "../../utils/Utils";
-
-function DashboardCard01() {
+export default memo(function DashboardCard01() {
   return (
     <div className="flex items-center justify-start gap-4 p-2.5 bg-custom-blue h-36 dark:bg-gray-800 shadow-xs rounded-xl">
       <img
@@ -26,6 +19,4 @@ function DashboardCard01() {
       </div>
     </div>
   );
-}
-
-export default DashboardCard01;
+});

@@ -1,48 +1,51 @@
-// import React, { useState, useEffect } from "react";
+import { memo } from "react";
 import Chart from "react-apexcharts";
 
 const BestPackagesUsageChart = () => {
   const options = {
     chart: {
       type: "bar",
-      height: 350,
+      toolbar: { show: false },
     },
     plotOptions: {
       bar: {
-        borderRadius: 4,
-        borderRadiusApplication: "end",
-        horizontal: true,
+        horizontal: false,
+        columnWidth: "50%",
+        endingShape: "rounded",
       },
     },
-    dataLabels: {
-      enabled: false,
-    },
+    dataLabels: { enabled: false },
+    stroke: { show: true, width: 2, colors: ["transparent"] },
     xaxis: {
-      categories: [
-        "South Korea",
-        "Canada",
-        "United Kingdom",
-        "Netherlands",
-        "Italy",
-        "France",
-        "Japan",
-        "United States",
-        "China",
-        "Germany",
-      ],
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
     },
+
+    colors: ["#10B981", "#EF4444"],
+    legend: { show: false },
   };
 
   const series = [
-    {
-      data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380],
-    },
+    { name: "Income", data: [400, 500, 450, 600, 700, 650, 800] },
+    { name: "Expenses", data: [300, 400, 350, 450, 500, 480, 550] },
   ];
 
   return (
-    <div id="chart">
-      <Chart options={options} series={series} type="bar" height={350} />
+    <div className="bg-white shadow rounded h-2xs">
+      <div className="p-4">
+        {/* إضافة العنوان هنا */}
+        <h3 className="text-xl font-bold mb-4">Best Packages Usage</h3>
+        <div id="sales-income">
+          <Chart
+            options={options}
+            series={series}
+            type="bar"
+            height={290}
+            width="100%"
+          />
+        </div>
+      </div>
     </div>
   );
 };
-export default BestPackagesUsageChart;
+
+export default memo(BestPackagesUsageChart);

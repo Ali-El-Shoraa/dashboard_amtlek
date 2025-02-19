@@ -1,25 +1,36 @@
-export default function CardAccounting({ bg_color_card }) {
-  return (
-    <div>
-      <a
-        href="https://dashboard.amtalek.com/en/amtalek/accounting-data"
-        className={`flex items-center justify-between text-white p-5 rounded-xl ${bg_color_card}`}
-      >
-        <div>
-          <h4 className="">
-            <span>0</span>
-            EGP
-          </h4>
-          <p className="">Income 02 - 2025</p>
-        </div>
+import { memo } from "react";
 
-        <img
-          src="https://dmlygcfpc782j.cloudfront.net/assets/images/icons/currency.png"
-          alt="mony"
-          height={60}
-          width={60}
-        />
-      </a>
+const CardAccounting = ({ title, bg_color_card }) => {
+  const amount = 9962;
+  // تنسيق الرقم كعملة مصرية مع استخدام الأرقام اللاتينية
+  const formattedAmount = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "EGP",
+    maximumFractionDigits: 0,
+    numberingSystem: "latn", // استخدام الأرقام اللاتينية
+  }).format(amount);
+
+  return (
+    <div
+      className={`h-36 text-white dark:bg-gray-800 shadow-xs rounded-xl ${bg_color_card}`}
+    >
+      <div className="px-5 py-5 flex flex-col justify-between h-full">
+        <header className="flex justify-between items-start mb-2">
+          <h2 className="text-lg font-semibold dark:text-gray-100 mb-2">
+            {title}
+          </h2>
+          {new Date().toLocaleDateString("en-US", {
+            month: "numeric",
+            year: "numeric",
+          })}
+        </header>
+
+        <div className="text-3xl font-bold dark:text-gray-100 mr-2">
+          {formattedAmount}
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default memo(CardAccounting);
