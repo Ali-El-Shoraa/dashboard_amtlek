@@ -1,0 +1,30 @@
+.p-organizationchart .p-organizationchart-node-content {
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+}
+
+.p-organizationchart .p-organizationchart-line-top,
+.p-organizationchart .p-organizationchart-line-left {
+    border-color: var(--color-custom-blue);
+}
+
+.p-organizationchart .p-organizationchart-node-content.p-highlight img {
+    /* background-color: var(--color-custom-blue) !important; */
+    margin-top: -40px;
+    width: 100px !important;
+}
+
+/* تعطيل تأثير التكبير عند تحديد أو النقر على العقدة */
+.p-organizationchart .p-node.p-highlight .p-node-content,
+.p-organizationchart .p-node:active .p-node-content {
+    transform: none !important;
+}
+
+.p-organizationchart-node-content .p-organizationchart-selectable-node .p-highlight {
+    background-color: var(--color-custom-blue) !important;
+}
+
+.p-organizationchart .p-organizationchart-node-content.p-highlight {
+    background: #ecfeff;
+    color: #0e7490;
+}

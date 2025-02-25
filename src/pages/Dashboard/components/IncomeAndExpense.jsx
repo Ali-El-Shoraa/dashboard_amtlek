@@ -74,7 +74,8 @@ export default memo(function IncomeAndExpense({ title, viewType = "months" }) {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-4 bg-white shadow rounded h-full">
+    // max-w-4xl mx-auto p-4 bg-white shadow rounded h-full
+    <div className="p-4 bg-white shadow">
       {/* عنوان المخطط */}
       <h1 className="text-xl font-bold text-center mb-2">{title}</h1>
       {/* بيانات الدخل والمصاريف ونسبة الربح */}

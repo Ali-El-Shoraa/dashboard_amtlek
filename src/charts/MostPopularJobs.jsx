@@ -2,8 +2,7 @@ import { useState } from "react";
 import Chart from "react-apexcharts";
 
 export default function MostPopularJobs() {
-  //   const [selectedYear, setSelectedYear] = useState("2024");
-  //   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 
   // بيانات المخطط
   const series = [

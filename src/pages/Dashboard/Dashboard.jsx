@@ -44,34 +44,96 @@ import TaskProgressStatistics from "./components/charts/TaskProgressStatistics";
 import CalenderDasboard from "./components/Calender/CalenderDasboard";
 import JobsApplyedAndNotApplyed from "./components/charts/JobsApplyedAndNotApplyed";
 import MostPopularJobs from "../../charts/MostPopularJobs";
+import TableComponent from "../../components/ui/TableComponent";
 // import TooltipComponent from "./components/TooltipComponent";
 // import TeamScoring from "./components/Table/TeamScoring";
 export default memo(function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // ********************************************************************** START THIS DATA FOR TABLES **********************************************************************
+
+  // const dataOfArrayColumName = [
+  //   {
+  //     Header: "Lead Name",
+  //     accessor: "leadName",
+  //     Cell: ({ row }) => (
+  //       <div className="flex items-center gap-2">
+  //         <img
+  //           src={row.original.leadtImg}
+  //           alt="leadtImg"
+  //           className="w-10 h-10 rounded-full"
+  //         />
+  //         <a
+  //           href={row.original.leadLink}
+  //           target="_blank"
+  //           rel="noreferrer"
+  //           className="text-blue-600 hover:underline flex items-center gap-1"
+  //         >
+  //           <i className="fa fa-user" />
+  //           {row.original.leadName}
+  //         </a>
+  //       </div>
+  //     ),
+  //   },
+  //   {
+  //     Header: "Created at",
+  //     accessor: "createdAt",
+  //   },
+  //   {
+  //     Header: "Agent name",
+  //     accessor: "agentName",
+  //     Cell: ({ row }) => (
+  //       <div className="flex flex-col gap-2">
+  //         <div className="flex items-center gap-2">
+  //           <img
+  //             src={row.original.agentImg}
+  //             alt="Agent"
+  //             className="w-10 h-10 rounded-full"
+  //           />
+  //           <div className="flex flex-col">
+  //             <Link
+  //               to={row.original.agentLink}
+  //               target="_blank"
+  //               rel="noreferrer"
+  //               className="text-blue-600 hover:underline"
+  //             >
+  //               {row.original.agentName}
+  //             </Link>
+  //             <Link className="text-sm" to={`tel:${row.original.agentPhone}`}>
+  //               {row.original.agentPhone}
+  //             </Link>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     ),
+  //   },
+  //   {
+  //     Header: "Status",
+  //     accessor: "status",
+  //     Cell: ({ value }) => {
+  //       // تغيير اللون حسب الحالة
+  //       const bgColor =
+  //         value === "Opened"
+  //           ? "bg-blue-500"
+  //           : value === "Lost"
+  //           ? "bg-red-500"
+  //           : "bg-gray-500";
+  //       return (
+  //         <span className={`${bgColor} px-3 py-1 text-white rounded`}>
+  //           {value}
+  //         </span>
+  //       );
+  //     },
+  //   },
+  //   {
+  //     Header: "Deal cost",
+  //     accessor: "dealCost",
+  //   },
+  // ];
   const dataOfArrayColumName = [
     {
       Header: "Lead Name",
       accessor: "leadName",
-      Cell: ({ row }) => (
-        <div className="flex items-center gap-2">
-          <img
-            src={row.original.leadtImg}
-            alt="leadtImg"
-            className="w-10 h-10 rounded-full"
-          />
-          <a
-            href={row.original.leadLink}
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-600 hover:underline flex items-center gap-1"
-          >
-            <i className="fa fa-user" />
-            {row.original.leadName}
-          </a>
-        </div>
-      ),
     },
     {
       Header: "Created at",
@@ -80,36 +142,12 @@ export default memo(function Dashboard() {
     {
       Header: "Agent name",
       accessor: "agentName",
-      Cell: ({ row }) => (
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2">
-            <img
-              src={row.original.agentImg}
-              alt="Agent"
-              className="w-10 h-10 rounded-full"
-            />
-            <div className="flex flex-col">
-              <Link
-                to={row.original.agentLink}
-                target="_blank"
-                rel="noreferrer"
-                className="text-blue-600 hover:underline"
-              >
-                {row.original.agentName}
-              </Link>
-              <Link className="text-sm" to={`tel:${row.original.agentPhone}`}>
-                {row.original.agentPhone}
-              </Link>
-            </div>
-          </div>
-        </div>
-      ),
     },
     {
       Header: "Status",
       accessor: "status",
+      // إذا كان الجدول يدعم خاصية Cell يمكن تركها هنا
       Cell: ({ value }) => {
-        // تغيير اللون حسب الحالة
         const bgColor =
           value === "Opened"
             ? "bg-blue-500"
@@ -131,77 +169,174 @@ export default memo(function Dashboard() {
 
   const dataOfArrayRowsData = [
     {
-      leadName: "Khamis hegazy",
-      leadtImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+      leadName: (
+        <div className="flex items-center gap-2">
+          <img
+            src="https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg"
+            alt="leadtImg"
+            className="w-10 h-10 rounded-full"
+          />
+          <a
+            href="https://dashboard.amtalek.com/en/amtalek/crm-system/leads/965"
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-600 hover:underline flex items-center gap-1"
+          >
+            <i className="fa fa-user" />
+            Khamis hegazy
+          </a>
+        </div>
+      ),
       createdAt: "05-02-2025",
-      agentName: "hossam elkholy",
-      agentImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
-      agentPhone: "01550859246",
+      agentName: (
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <img
+              src="https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg"
+              alt="Agent"
+              className="w-10 h-10 rounded-full"
+            />
+            <div className="flex flex-col">
+              <a
+                href="https://dashboard.amtalek.com/en/amtalek/admins/231"
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                hossam elkholy
+              </a>
+              <a className="text-sm" href="tel:01550859246">
+                01550859246
+              </a>
+            </div>
+          </div>
+        </div>
+      ),
       status: "Opened",
       dealCost: "0.0 EGP",
-      leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/965",
-      agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
     },
     {
-      leadName: "Adham Mohsen",
-      leadtImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
-      agentPhone: "01550859246",
+      leadName: (
+        <div className="flex items-center gap-2">
+          <img
+            src="https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg"
+            alt="leadtImg"
+            className="w-10 h-10 rounded-full"
+          />
+          <a
+            href="https://dashboard.amtalek.com/en/amtalek/crm-system/leads/962"
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-600 hover:underline flex items-center gap-1"
+          >
+            <i className="fa fa-user" />
+            Adham Mohsen
+          </a>
+        </div>
+      ),
       createdAt: "05-02-2025",
-      agentName: "hossam elkholy",
-      agentImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
-      agentPhone: "01550859246",
+      agentName: (
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <img
+              src="https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg"
+              alt="Agent"
+              className="w-10 h-10 rounded-full"
+            />
+            <div className="flex flex-col">
+              <a
+                href="https://dashboard.amtalek.com/en/amtalek/admins/231"
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                hossam elkholy
+              </a>
+              <a className="text-sm" href="tel:01550859246">
+                01550859246
+              </a>
+            </div>
+          </div>
+        </div>
+      ),
       status: "Opened",
       dealCost: "0.0 EGP",
-      leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/962",
-      agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
     },
-    {
-      leadName: "Dina Abdulaah",
-      leadtImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
-      createdAt: "05-02-2025",
-      agentName: "hossam elkholy",
-      agentImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
-      agentPhone: "01550859246",
-      status: "Lost",
-      dealCost: "0.0 EGP",
-      leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/960",
-      agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
-    },
-    {
-      leadName: "Doda Fouad",
-      leadtImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
-      createdAt: "02-02-2025",
-      agentName: "hossam elkholy",
-      agentImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
-      agentPhone: "01550859246",
-      status: "Opened",
-      dealCost: "0.0 EGP",
-      leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/877",
-      agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
-    },
-    {
-      leadName: "Mahmoud Saber",
-      leadtImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
-      createdAt: "02-02-2025",
-      agentName: "hossam elkholy",
-      agentImg:
-        "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
-      agentPhone: "01550859246",
-      status: "Opened",
-      dealCost: "0.0 EGP",
-      leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/876",
-      agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
-    },
+    // يمكنك إضافة المزيد من الصفوف بنفس الطريقة
   ];
+  // const dataOfArrayRowsData = [
+  //   {
+  //     leadName: "Khamis hegazy",
+  //     leadtImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     createdAt: "05-02-2025",
+  //     agentName: "hossam elkholy",
+  //     agentImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     agentPhone: "01550859246",
+  //     status: "Opened",
+  //     dealCost: "0.0 EGP",
+  //     leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/965",
+  //     agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
+  //   },
+  //   {
+  //     leadName: "Adham Mohsen",
+  //     leadtImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     agentPhone: "01550859246",
+  //     createdAt: "05-02-2025",
+  //     agentName: "hossam elkholy",
+  //     agentImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     agentPhone: "01550859246",
+  //     status: "Opened",
+  //     dealCost: "0.0 EGP",
+  //     leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/962",
+  //     agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
+  //   },
+  //   {
+  //     leadName: "Dina Abdulaah",
+  //     leadtImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     createdAt: "05-02-2025",
+  //     agentName: "hossam elkholy",
+  //     agentImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     agentPhone: "01550859246",
+  //     status: "Lost",
+  //     dealCost: "0.0 EGP",
+  //     leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/960",
+  //     agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
+  //   },
+  //   {
+  //     leadName: "Doda Fouad",
+  //     leadtImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     createdAt: "02-02-2025",
+  //     agentName: "hossam elkholy",
+  //     agentImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     agentPhone: "01550859246",
+  //     status: "Opened",
+  //     dealCost: "0.0 EGP",
+  //     leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/877",
+  //     agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
+  //   },
+  //   {
+  //     leadName: "Mahmoud Saber",
+  //     leadtImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     createdAt: "02-02-2025",
+  //     agentName: "hossam elkholy",
+  //     agentImg:
+  //       "https://dmlygcfpc782j.cloudfront.net/media/admins/1718289090.jpg",
+  //     agentPhone: "01550859246",
+  //     status: "Opened",
+  //     dealCost: "0.0 EGP",
+  //     leadLink: "https://dashboard.amtalek.com/en/amtalek/crm-system/leads/876",
+  //     agentLink: "https://dashboard.amtalek.com/en/amtalek/admins/231",
+  //   },
+  // ];
 
   const GeneralStatisticsData = [
     {
@@ -1047,131 +1182,158 @@ export default memo(function Dashboard() {
 
   // **********************************************************************
 
-  const dataAttendanceTimeline = useMemo(
-    () => [
-      {
-        employees: (
-          <div className="flex items-center gap-3 py-4">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
-              alt="Maya Sebaii"
-              className="w-8 h-8 rounded-full"
-            />
-            <div className="flex flex-col gap-1">
-              <a
-                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
-                target="_blank"
-                className=""
-              >
-                Ali El-Shoraa
-              </a>
-              <a href="" className="text-xs text-gray-400">
-                01550859246
-              </a>
-            </div>
-          </div>
-        ),
-      },
+  // const dataAttendanceTimeline = useMemo(
+  //   () => [
+  //     {
+  //       employees: (
+  //         <div className="flex items-center gap-3 py-4">
+  //           <img
+  //             src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+  //             alt="Maya Sebaii"
+  //             className="w-8 h-8 rounded-full"
+  //           />
+  //           <div className="flex flex-col gap-1">
+  //             <a
+  //               href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+  //               target="_blank"
+  //               className=""
+  //             >
+  //               Ali El-Shoraa
+  //             </a>
+  //             <a href="" className="text-xs text-gray-400">
+  //               01550859246
+  //             </a>
+  //           </div>
+  //         </div>
+  //       ),
+  //     },
 
-      {
-        employees: (
-          <div className="flex items-center gap-3 py-4">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
-              alt="Maya Sebaii"
-              className="w-8 h-8 rounded-full"
-            />
-            <div className="flex flex-col gap-1">
-              <a
-                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
-                target="_blank"
-                className=""
-              >
-                Ali El-Shoraa
-              </a>
-              <a href="" className="text-xs text-gray-400">
-                01550859246
-              </a>
-            </div>
-          </div>
-        ),
-      },
+  //     {
+  //       employees: (
+  //         <div className="flex items-center gap-3 py-4">
+  //           <img
+  //             src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+  //             alt="Maya Sebaii"
+  //             className="w-8 h-8 rounded-full"
+  //           />
+  //           <div className="flex flex-col gap-1">
+  //             <a
+  //               href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+  //               target="_blank"
+  //               className=""
+  //             >
+  //               Ali El-Shoraa
+  //             </a>
+  //             <a href="" className="text-xs text-gray-400">
+  //               01550859246
+  //             </a>
+  //           </div>
+  //         </div>
+  //       ),
+  //     },
 
-      {
-        employees: (
-          <div className="flex items-center gap-3 py-4">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
-              alt="Maya Sebaii"
-              className="w-8 h-8 rounded-full"
-            />
-            <div className="flex flex-col gap-1">
-              <a
-                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
-                target="_blank"
-                className=""
-              >
-                Ali El-Shoraa
-              </a>
-              <a href="" className="text-xs text-gray-400">
-                01550859246
-              </a>
-            </div>
-          </div>
-        ),
-      },
+  //     {
+  //       employees: (
+  //         <div className="flex items-center gap-3 py-4">
+  //           <img
+  //             src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+  //             alt="Maya Sebaii"
+  //             className="w-8 h-8 rounded-full"
+  //           />
+  //           <div className="flex flex-col gap-1">
+  //             <a
+  //               href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+  //               target="_blank"
+  //               className=""
+  //             >
+  //               Ali El-Shoraa
+  //             </a>
+  //             <a href="" className="text-xs text-gray-400">
+  //               01550859246
+  //             </a>
+  //           </div>
+  //         </div>
+  //       ),
+  //     },
 
-      {
-        employees: (
-          <div className="flex items-center gap-3 py-4">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
-              alt="Maya Sebaii"
-              className="w-8 h-8 rounded-full"
-            />
-            <div className="flex flex-col gap-1">
-              <a
-                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
-                target="_blank"
-                className=""
-              >
-                Ali El-Shoraa
-              </a>
-              <a href="" className="text-xs text-gray-400">
-                01550859246
-              </a>
-            </div>
-          </div>
-        ),
-      },
+  //     {
+  //       employees: (
+  //         <div className="flex items-center gap-3 py-4">
+  //           <img
+  //             src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+  //             alt="Maya Sebaii"
+  //             className="w-8 h-8 rounded-full"
+  //           />
+  //           <div className="flex flex-col gap-1">
+  //             <a
+  //               href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+  //               target="_blank"
+  //               className=""
+  //             >
+  //               Ali El-Shoraa
+  //             </a>
+  //             <a href="" className="text-xs text-gray-400">
+  //               01550859246
+  //             </a>
+  //           </div>
+  //         </div>
+  //       ),
+  //     },
 
-      {
-        employees: (
-          <div className="flex items-center gap-3 py-4">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
-              alt="Maya Sebaii"
-              className="w-8 h-8 rounded-full"
-            />
-            <div className="flex flex-col gap-1">
-              <a
-                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
-                target="_blank"
-                className=""
-              >
-                Ali El-Shoraa
-              </a>
-              <a href="" className="text-xs text-gray-400">
-                01550859246
-              </a>
-            </div>
-          </div>
-        ),
-      },
-    ],
-    []
-  );
+  //     {
+  //       employees: (
+  //         <div className="flex items-center gap-3 py-4">
+  //           <img
+  //             src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+  //             alt="Maya Sebaii"
+  //             className="w-8 h-8 rounded-full"
+  //           />
+  //           <div className="flex flex-col gap-1">
+  //             <a
+  //               href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+  //               target="_blank"
+  //               className=""
+  //             >
+  //               Ali El-Shoraa
+  //             </a>
+  //             <a href="" className="text-xs text-gray-400">
+  //               01550859246
+  //             </a>
+  //           </div>
+  //         </div>
+  //       ),
+  //     },
+  //   ],
+  //   []
+  // );
 
+  // const br = (index) => {
+  //   return index % 2 === 0 ? (
+  //     <FaCheck className="text-green-500 text-lg" />
+  //   ) : (
+  //     <FaTimes className="text-red-500 text-lg" />
+  //   );
+  // };
+
+  // const yy = Array.from({ length: 30 }).map((_, index) => ({
+  //   Header: index + 1,
+  //   id: `col-${index}`, // معرف فريد لكل عمود
+  //   // على سبيل المثال: لكل عمود، إذا كان الرقم الزوجي نعرض أيقونة صح، وإلا أيقونة خطأ
+  //   Cell: br(index),
+  // }));
+
+  // const columnsmployeesAttendanceTimeline = useMemo(
+  //   () => [
+  //     {
+  //       Header: "Employees",
+  //       accessor: "employees",
+  //     },
+  //     ...yy,
+  //   ],
+  //   []
+  // );
+
+  // دالة لإرجاع أيقونة حسب الرقم
   const br = (index) => {
     return index % 2 === 0 ? (
       <FaCheck className="text-green-500 text-lg" />
@@ -1180,13 +1342,200 @@ export default memo(function Dashboard() {
     );
   };
 
+  // إنشاء كائن يحتوي على خصائص الأعمدة الإضافية مع قيمها
+  const extraColumnsData = Array.from({ length: 30 }).reduce(
+    (acc, _, index) => {
+      acc[`col-${index}`] = br(index);
+      return acc;
+    },
+    {}
+  );
+
+  // تعديل بيانات الصفوف بحيث تحتوي على الخاصية "employees" وخصائص الأعمدة الإضافية
+  const dataAttendanceTimeline = useMemo(() => {
+    const baseData = [
+      {
+        employees: (
+          <div className="flex items-center gap-3 py-4">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+              alt="Maya Sebaii"
+              className="w-8 h-8 rounded-full"
+            />
+            <div className="flex flex-col gap-1">
+              <a
+                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+                target="_blank"
+                className=""
+              >
+                Ali El-Shoraa
+              </a>
+              <a href="" className="text-xs text-gray-400">
+                01550859246
+              </a>
+            </div>
+          </div>
+        ),
+      },
+      // يمكنك إضافة المزيد من الصفوف هنا بنفس الشكل
+      {
+        employees: (
+          <div className="flex items-center gap-3 py-4">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+              alt="Maya Sebaii"
+              className="w-8 h-8 rounded-full"
+            />
+            <div className="flex flex-col gap-1">
+              <a
+                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+                target="_blank"
+                className=""
+              >
+                Ali El-Shoraa
+              </a>
+              <a href="" className="text-xs text-gray-400">
+                01550859246
+              </a>
+            </div>
+          </div>
+        ),
+      },
+      {
+        employees: (
+          <div className="flex items-center gap-3 py-4">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+              alt="Maya Sebaii"
+              className="w-8 h-8 rounded-full"
+            />
+            <div className="flex flex-col gap-1">
+              <a
+                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+                target="_blank"
+                className=""
+              >
+                Ali El-Shoraa
+              </a>
+              <a href="" className="text-xs text-gray-400">
+                01550859246
+              </a>
+            </div>
+          </div>
+        ),
+      },
+
+      {
+        employees: (
+          <div className="flex items-center gap-3 py-4">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+              alt="Maya Sebaii"
+              className="w-8 h-8 rounded-full"
+            />
+            <div className="flex flex-col gap-1">
+              <a
+                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+                target="_blank"
+                className=""
+              >
+                Ali El-Shoraa
+              </a>
+              <a href="" className="text-xs text-gray-400">
+                01550859246
+              </a>
+            </div>
+          </div>
+        ),
+      },
+
+      {
+        employees: (
+          <div className="flex items-center gap-3 py-4">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+              alt="Maya Sebaii"
+              className="w-8 h-8 rounded-full"
+            />
+            <div className="flex flex-col gap-1">
+              <a
+                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+                target="_blank"
+                className=""
+              >
+                Ali El-Shoraa
+              </a>
+              <a href="" className="text-xs text-gray-400">
+                01550859246
+              </a>
+            </div>
+          </div>
+        ),
+      },
+
+      {
+        employees: (
+          <div className="flex items-center gap-3 py-4">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+              alt="Maya Sebaii"
+              className="w-8 h-8 rounded-full"
+            />
+            <div className="flex flex-col gap-1">
+              <a
+                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+                target="_blank"
+                className=""
+              >
+                Ali El-Shoraa
+              </a>
+              <a href="" className="text-xs text-gray-400">
+                01550859246
+              </a>
+            </div>
+          </div>
+        ),
+      },
+
+      {
+        employees: (
+          <div className="flex items-center gap-3 py-4">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D4D03AQE8LjhAYdVi_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719033759653?e=1745452800&v=beta&t=-drgPZ3ggmqFK0U8Jc9AZ-0_7m3jgBdy6rTYMiRKthQ"
+              alt="Maya Sebaii"
+              className="w-8 h-8 rounded-full"
+            />
+            <div className="flex flex-col gap-1">
+              <a
+                href="https://dashboard.amtalek.com/en/amtalek/admins/235"
+                target="_blank"
+                className=""
+              >
+                Ali El-Shoraa
+              </a>
+              <a href="" className="text-xs text-gray-400">
+                01550859246
+              </a>
+            </div>
+          </div>
+        ),
+      },
+    ];
+
+    // لكل صف في البيانات ندمج بيانات الأعمدة الإضافية
+    return baseData.map((row) => ({
+      ...row,
+      ...extraColumnsData,
+    }));
+  }, []);
+
+  // تعديل مصفوفة الأعمدة الإضافية مع إضافة accessor لكل عمود
   const yy = Array.from({ length: 30 }).map((_, index) => ({
     Header: index + 1,
-    id: `col-${index}`, // معرف فريد لكل عمود
-    // على سبيل المثال: لكل عمود، إذا كان الرقم الزوجي نعرض أيقونة صح، وإلا أيقونة خطأ
-    Cell: br(index),
+    accessor: `col-${index}`, // المفتاح الذي يتوافق مع بيانات الصف
   }));
 
+  // مصفوفة الأعمدة النهائية مع عمود "Employees" وأعمدة yy
   const columnsmployeesAttendanceTimeline = useMemo(
     () => [
       {
@@ -1201,200 +1550,203 @@ export default memo(function Dashboard() {
   // ********************************************************************** END THIS DATA FOR TABLES **********************************************************************
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+    <main className="grow">
+      {/* px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto  */}
+      <div className="space-y-4">
+        {/*  ********************************************************************** START 6 CARDS TOP ********************************************************************** */}
 
-      {/* Content area */}
-      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-        {/*  ********************************************************************** START HEADER ********************************************************************** */}
-        {/*  Site header */}
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <div className="space-y-3.5">
+          <div className="grid grid-cols-3 gap-4 max-2xl:grid-cols-2 max-lg:grid-cols-1">
+            <DashboardCard01 />
+            <DashboardCard02 />
 
-        {/*  ********************************************************************** END HEADER ********************************************************************** */}
+            <ScheduledMeetingsCard />
+            {/* </div>
 
-        <main className="grow">
-          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto space-y-4">
-            {/*  ********************************************************************** START 6 CARDS TOP ********************************************************************** */}
-
-            <div className="space-y-3.5">
-              <div className="grid grid-cols-3 gap-4">
-                <DashboardCard01 />
-                <DashboardCard02 />
-
-                <ScheduledMeetingsCard />
-              </div>
-
-              <div className="grid grid-cols-3 gap-4">
-                <CardAccounting
-                  bg_color_card={`bg-purple-clouds`}
-                  title={`Expenses`}
-                />
-                {/* </div> */}
-                <CardAccounting
-                  bg_color_card={`bg-custome-green`}
-                  title={`Balance`}
-                />
-                <CardAccounting
-                  bg_color_card={`bg-custome-red`}
-                  title={`Income`}
-                />
-              </div>
-            </div>
-
-            {/*  ********************************************************************** END 6 CARDS TOP ********************************************************************** */}
-
-            {/*  ********************************************************************** START CHARTS Income And Expense ********************************************************************** */}
-
-            <div className="flex gap-2">
-              <div className="w-2/5">
-                <IncomeAndExpense title={`Income & Expense in 2025`} />
-              </div>
-
-              <div className="w-3/5">
-                <IncomeAndExpense
-                  viewType="days"
-                  title={`Income & Expense in Feb-2025`}
-                />
-              </div>
-            </div>
-            {/*  ********************************************************************** END CHARTS Income And Expense ********************************************************************** */}
-
-            <div className="grid grid-cols-4 gap-4">
-              {GeneralStatisticsData?.map((obj) => (
-                <GeneralStatistics
-                  key={obj?.id}
-                  title={obj?.title}
-                  count={obj?.count}
-                  icon={obj.icon}
-                />
-              ))}
-            </div>
-
-            <div className="flex gap-2">
-              <div className="w-3/5">
-                <LeadsPipeLineChart />
-              </div>
-
-              <div className="w-2/5">
-                <LeadsCurrentStatus />
-              </div>
-            </div>
-
-            <div>
-              <TablesDashboard
-                dataOfArrayRowsData={dataOfArrayRowsData}
-                dataOfArrayColumName={dataOfArrayColumName}
-              />
-            </div>
-
-            <div className="flex gap-2 mb-9">
-              <div className="w-2/5">
-                <UsersFromChart />
-              </div>
-
-              <div className="w-3/5">
-                <BestCountriesChart />
-              </div>
-            </div>
-
-            <div className="flex gap-2 mb-9">
-              <div className="w-3/5">
-                <EmployeeKpiChart />
-              </div>
-
-              <div className="w-2/5">
-                <GenderOfCompanies />
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              <div className="w-2/5">
-                <LatestEmployeeActivities />
-              </div>
-
-              <div className="w-3/5">
-                <EmployeeActivitiesChart />
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              <div className="w-2/5">
-                <JobsApplyedAndNotApplyed />
-              </div>
-
-              <div className="w-3/5">
-                <MostPopularJobs />
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              <div className="w-3/5">
-                <TableLatestEmployeesTasks />
-              </div>
-
-              <div className="w-2/5">
-                <div className="flex flex-col gap-2">
-                  <TaskStatisticsCard />
-                  <TaskProgressStatistics />
-                </div>
-              </div>
-            </div>
-
-            {/*  ********************************************************************** START CALENDER ********************************************************************** */}
-
-            <div className="">
-              <CalenderDasboard />
-            </div>
-
-            {/*  ********************************************************************** END CALENDER ********************************************************************** */}
-
-            {/*  ********************************************************************** START LATSTE TABLE ********************************************************************** */}
-
-            <div>
-              <TablesDashboard
-                title="Employees Attendance Timeline"
-                dataOfArrayRowsData={dataAttendanceTimeline}
-                dataOfArrayColumName={columnsmployeesAttendanceTimeline}
-              />
-            </div>
-            {/* last tables */}
-
-            <div>
-              <TablesDashboard
-                title="Team Scoring In [ 2/2025 ]"
-                dataOfArrayRowsData={dataTeamScoring}
-                dataOfArrayColumName={columnsTeamScoring}
-              />
-            </div>
-
-            <div>
-              <TablesDashboard
-                title="Latest Vendors"
-                dataOfArrayRowsData={dataLatestVendors}
-                dataOfArrayColumName={columnsLatestVendors}
-              />
-            </div>
-
-            <div>
-              <TablesDashboard
-                title="Recent Activities In [ 12/2/2025 ]"
-                dataOfArrayRowsData={dataRecentActivities}
-                dataOfArrayColumName={columnsRecentActivities}
-              />
-            </div>
-
-            {/*  ********************************************************************** END LATSTE TABLE ********************************************************************** */}
+          <div className="grid grid-cols-3 gap-4"> */}
+            <CardAccounting
+              bg_color_card={`bg-purple-clouds`}
+              title={`Expenses`}
+            />
+            {/* </div> */}
+            <CardAccounting
+              bg_color_card={`bg-custome-green`}
+              title={`Balance`}
+            />
+            <CardAccounting bg_color_card={`bg-custome-red`} title={`Income`} />
           </div>
-        </main>
+        </div>
 
-        {/*  ********************************************************************** START FOOTER ********************************************************************** */}
+        {/*  ********************************************************************** END 6 CARDS TOP ********************************************************************** */}
 
-        {/* start footer */}
-        <Footer />
+        {/*  ********************************************************************** START CHARTS Income And Expense ********************************************************************** */}
 
-        {/*  ********************************************************************** END FOOTER ********************************************************************** */}
+        <div className="flex gap-2 max-2xl:flex-col">
+          <div className="w-2/5 max-2xl:w-full">
+            <IncomeAndExpense title={`Income & Expense in 2025`} />
+          </div>
+
+          <div className="w-3/5 max-2xl:w-full">
+            <IncomeAndExpense
+              viewType="days"
+              title={`Income & Expense in Feb-2025`}
+            />
+          </div>
+        </div>
+        {/*  ********************************************************************** END CHARTS Income And Expense ********************************************************************** */}
+
+        <div className="grid grid-cols-4 gap-4 max-2xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1">
+          {GeneralStatisticsData?.map((obj) => (
+            <GeneralStatistics
+              key={obj?.id}
+              title={obj?.title}
+              count={obj?.count}
+              icon={obj.icon}
+            />
+          ))}
+        </div>
+
+        <div className="flex gap-2 max-xl:flex-col">
+          <div className="w-3/5 max-xl:w-full">
+            <LeadsPipeLineChart />
+          </div>
+
+          <div className="w-2/5 max-xl:w-full">
+            <LeadsCurrentStatus />
+          </div>
+        </div>
+
+        <div>
+          <TablesDashboard
+            dataOfArrayRowsData={dataOfArrayRowsData}
+            dataOfArrayColumName={dataOfArrayColumName}
+          />
+        </div>
+
+        <div className="flex gap-2 mb-9 max-xl:flex-col">
+          <div className="w-2/5 max-xl:w-full">
+            <UsersFromChart />
+          </div>
+
+          <div className="w-3/5 max-xl:w-full">
+            <BestCountriesChart />
+          </div>
+        </div>
+
+        <div className="flex gap-2 mb-9 max-xl:flex-col">
+          <div className="w-3/5 max-xl:w-full">
+            <EmployeeKpiChart />
+          </div>
+
+          <div className="w-2/5 max-xl:w-full">
+            <GenderOfCompanies />
+          </div>
+        </div>
+
+        <div className="flex gap-2 max-xl:flex-col">
+          <div className="w-2/5 max-xl:w-full">
+            <LatestEmployeeActivities />
+          </div>
+
+          <div className="w-3/5 max-xl:w-full">
+            <EmployeeActivitiesChart />
+          </div>
+        </div>
+
+        <div className="flex gap-2 max-xl:flex-col">
+          <div className="w-2/5 max-xl:w-full">
+            <JobsApplyedAndNotApplyed />
+          </div>
+
+          <div className="w-3/5 max-xl:w-full">
+            <MostPopularJobs />
+          </div>
+        </div>
+
+        <div className="flex gap-2 max-xl:flex-col">
+          <div className="w-3/5 max-xl:w-full">
+            <TableLatestEmployeesTasks />
+          </div>
+
+          <div className="w-2/5 max-xl:w-full">
+            <div className="flex flex-col gap-2">
+              <TaskStatisticsCard />
+              <TaskProgressStatistics />
+            </div>
+          </div>
+        </div>
+
+        {/*  ********************************************************************** START CALENDER ********************************************************************** */}
+
+        <div className="">
+          <CalenderDasboard />
+        </div>
+
+        {/*  ********************************************************************** END CALENDER ********************************************************************** */}
+
+        {/*  ********************************************************************** START LATSTE TABLE ********************************************************************** */}
+
+        <div>
+          <TablesDashboard
+            title="Employees Attendance Timeline"
+            dataOfArrayRowsData={dataAttendanceTimeline}
+            dataOfArrayColumName={columnsmployeesAttendanceTimeline}
+          />
+        </div>
+        {/* last tables */}
+
+        <div>
+          <TablesDashboard
+            title="Team Scoring In [ 2/2025 ]"
+            dataOfArrayRowsData={dataTeamScoring}
+            dataOfArrayColumName={columnsTeamScoring}
+          />
+        </div>
+
+        <div>
+          <TablesDashboard
+            title="Latest Vendors"
+            dataOfArrayRowsData={dataLatestVendors}
+            dataOfArrayColumName={columnsLatestVendors}
+          />
+        </div>
+
+        <div>
+          <TablesDashboard
+            title="Recent Activities In [ 12/2/2025 ]"
+            dataOfArrayRowsData={dataRecentActivities}
+            dataOfArrayColumName={columnsRecentActivities}
+          />
+        </div>
+
+        {/*  ********************************************************************** END LATSTE TABLE ********************************************************************** */}
       </div>
-    </div>
+    </main>
   );
 });
+
+{
+  /* <div className="flex h-screen overflow-hidden"> */
+}
+{
+  /* Sidebar */
+}
+{
+  /* <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */
+}
+
+{
+  /* Content area */
+}
+{
+  /* <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden"> */
+}
+{
+  /*  ********************************************************************** START HEADER ********************************************************************** */
+}
+{
+  /*  Site header */
+}
+{
+  /* <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */
+}

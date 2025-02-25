@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoIosNotifications } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 // بيانات الإشعارات في مصفوفة
 const notifications = [
@@ -13,6 +14,26 @@ const notifications = [
   },
   {
     id: 2,
+    link: "/activities",
+    avatar: "https://ali-el-shoraa.netlify.app/imgs/ali-eui1.jpg",
+    alt: "Profile",
+    details: "Denise Nedry replied to Anna Srzand",
+    subDetails:
+      "“Oh, I finished de-bugging the phones, but the system's compiling for eighteen minutes, or twenty. So, some minor systems may go on and off for a while.”",
+    time: "Last Wednesday at 9:42 am",
+  },
+  {
+    id: 4,
+    link: "/activities",
+    avatar: "https://ali-el-shoraa.netlify.app/imgs/ali-eui1.jpg",
+    alt: "Profile",
+    details: "Denise Nedry replied to Anna Srzand",
+    subDetails:
+      "“Oh, I finished de-bugging the phones, but the system's compiling for eighteen minutes, or twenty. So, some minor systems may go on and off for a while.”",
+    time: "Last Wednesday at 9:42 am",
+  },
+  {
+    id: 5,
     link: "/activities",
     avatar: "https://ali-el-shoraa.netlify.app/imgs/ali-eui1.jpg",
     alt: "Profile",
@@ -37,7 +58,7 @@ const notifications = [
   },
 ];
 
-const NotificationDropdown = () => {
+const NotificationDropdown = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   // تغيير حالة القائمة
@@ -58,11 +79,12 @@ const NotificationDropdown = () => {
 
       {/* القائمة المنسدلة */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white border rounded shadow-lg z-10">
+        <div className="absolute right-0 p-2.5 w-[450px] h-[500px] mt-2 w-80 bg-white border rounded shadow-lg z-10">
           <div className="px-4 py-3 border-b">
             <h4 className="text-lg font-semibold">Notifications</h4>
           </div>
-          <div className="max-h-60 overflow-y-auto">
+          {/* max-h-60  */}
+          <div className="overflow-y-auto">
             <ul className="divide-y">
               {notifications.map((item) => (
                 <li key={item.id} className="p-4 hover:bg-gray-100">
@@ -101,9 +123,9 @@ const NotificationDropdown = () => {
             </ul>
           </div>
           <div className="px-4 py-3 border-t flex justify-between">
-            <a href="/activities" className="text-blue-500 text-sm">
+            <Link to={`/`} className="text-blue-500 text-sm">
               View all
-            </a>
+            </Link>
             <button className="text-blue-500 text-sm focus:outline-none">
               Clear all
             </button>
